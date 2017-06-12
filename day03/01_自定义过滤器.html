@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body ng-app="app">
+
+        {{"hello world" | bigWrite}}
+
+        <script>
+            angular.module('app',[])
+                .filter('bigWrite',function(){
+                    return function(input){
+                        if(input){
+                            return input[0].toUpperCase() + input.slice(1)
+                        }
+                    }
+                });
+
+            /*
+            假设模块名是app
+            自定义过滤:
+                app.filter('一参','二参')
+                    一参: 自定义的过滤器的名字
+                    二参: 闭包
+                        function(){
+                            return function(input){
+                                //input -> 要过滤的内容
+                            }
+                        }
+
+             */
+
+        </script>
+    </body>
+</html>

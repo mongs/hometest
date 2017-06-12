@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body ng-app="app">
+
+        <div title></div>
+        <title></title>
+        <div class="title"></div>
+
+        <mybtn >点我点我</mybtn>
+        <div mybtn>换个名字</div>
+        <script>
+            angular.module('app',[])
+                .directive('title',function(){
+                    return {
+                        template:"<h1>This is the title</h1>",
+                        replace:true,
+                        restrict:"EAC"
+                    }
+                })
+                .directive('mybtn',function(){
+                    return {
+                        transclude:true,
+                        template:"<button class='   btn-primary' ng-transclude>按钮</button>",
+                        replace:true,
+                        restrict:"EAC"
+
+                    }
+                })
+            /*
+
+            app.directive('title',function(){
+                return {
+                    //模板
+                    template:"<h1>This is the title</h1>",
+                    //是否替换外层包裹的自定义标签
+                    replace:true,
+                    //替换自定义指令中的文字内容,要跟ng-transclude配合使用
+                    transclude: true,
+                    restrict:"E"
+                        E     ->     element  标签
+                        A     ->     attribute 属性
+                        C     ->     class
+                        M     ->     注释
+                }
+            })
+
+             */
+        </script>
+
+    </body>
+</html>

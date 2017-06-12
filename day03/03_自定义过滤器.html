@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body ng-app="app" ng-controller="Ctrl">
+
+        <ul>
+            <li ng-repeat="product in products">
+                {{product.tel | myFilter:6}}
+            </li>
+        </ul>
+
+        <script>
+            angular.module('app',[])
+                .filter('myFilter',function(){
+                    return function(input,num){
+                        return input.substr(0,input.length - num) + "*".repeat(num)
+                    }
+                })
+                .controller('Ctrl',function($scope){
+                    $scope.products = [
+    		            {
+    		                id:1000,
+    		                name: 'iPhone7',
+    		                tel: '18645457878',    //数量
+    		                price: 6480
+    		            },{
+    		                id:2000,
+    		                name: 'iPhone7 Plus',
+    		                tel: '18678784545',
+    		                price: 7480
+    		            },{
+    		                id:3000,
+    		                name: '小米 7',
+    		                tel: '18645471178',
+    		                price: 1480
+    		            },{
+    		                id:4000,
+    		                name: '诺基亚1330',
+    		                tel: '18645132578',
+    		                price: 200
+    		            }
+    		        ];
+                });
+
+            /*
+            假设模块名是app
+            自定义过滤:
+                app.filter('一参','二参')
+                    一参: 自定义的过滤器的名字
+                    二参: 闭包
+                        function(){
+                            return function(input,str){
+                                //input -> 要过滤的内容
+                                // str -> 代表是使用过滤器是:后边的过滤条件
+                            }
+                        }
+
+             */
+
+        </script>
+    </body>
+</html>

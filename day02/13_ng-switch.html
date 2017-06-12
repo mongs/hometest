@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js"></script>
+	</head>
+	<body ng-app="app" ng-controller="Controller">
+		
+		<select ng-options="color for color in colors" ng-model="text"></select>
+		
+		<ul ng-switch="text">
+			<li ng-switch-when="red">如果是red，这个就显示</li>
+			<li ng-switch-when="yellow">如果是yellow，这个就显示</li>
+			<li ng-switch-when="blue">如果是blue，这个就显示</li>
+			<li ng-switch-default>默认显示</li>
+			
+		</ul>
+		
+		
+		<script type="text/javascript">
+			angular.module('app',[])
+				.controller('Controller',function($scope){
+					$scope.colors = ["red","yellow","blue","black"]
+				})
+			
+			/*
+			ng-switch		：类似switch，case
+				ng-switch-when		如果满足这个条件，当前这项就显示
+				ng-switch-default	如果when的条件都不符合，这条就显示
+			*/
+		</script>
+	</body>
+</html>

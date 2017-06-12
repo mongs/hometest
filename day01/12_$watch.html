@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+        <form>
+            <div>
+                <label for="username">username:</label>
+                <input class="form-control" type="text" name="username" id="username" ng-model="user.name">
+                <p class="text-primary">{{msg}}</p>
+            </div>
+            <div>
+                <label for="password">password:</label>
+                <input class="form-control" type="password" name="password" id="password" ng-model="user.password">
+                <!-- <p class="text-primary">{{msg}}</p> -->
+            </div>
+
+        </form>
+
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            angular.module('app',[])
+                .controller('Controller',function($scope){
+                    $scope.user = {
+                        name:'',
+                        password:''
+                    };
+                    $scope.msg = "请输入用户名";
+                    // 6 - 10
+                    $scope.$watch('user.name',function(newValue,oldValue){
+                        //console.log("新值是: " + newValue + " ;旧值是: " + oldValue)
+                        if(newValue.length < 6){
+                            $scope.msg = "用户名长度不能小于6位"
+                        }else if(newValue.length > 10){
+                            $scope.msg = "用户名长度不能大于10位"
+                        }else{
+                            $scope.msg = "^_^";
+                    \4    }
+                    })
+                })
+                /*
+                控制器的作用:
+                    1. 暴露数据
+                    2. 暴露行为
+                    3. 监听数据变化
+                        $scope.$watch("一参","二参")
+                            一参: 要监听的数据, 这里没有$scope
+                            二参: 回调函数
+                                function(newValue,oldValue){}
+                                newValue: 新的数据
+                                oldValue: 上一个的数据,改变前的数据
+                 */
+        </script>
+    </body>
+</html>

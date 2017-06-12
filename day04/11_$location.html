@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="Ctrl">
+    <a href="12_spa.html">12_spa.html</a>
+    <script>
+    angular.module('app',[])
+        .controller('Ctrl',['$scope','$location',function($scope,$location){
+            console.log($location);
+            //http://127.0.0.1:3000/day04/11_%24location.html#/168?name=wally&age=17#8848
+            //
+
+            console.log($location.absUrl());
+
+            $location.hash('8848')
+            console.log($location.hash());
+
+            console.log($location.search());
+
+            console.log($location.port());
+
+            console.log($location.path());    //  /168
+
+            console.log($location.protocol());
+
+            console.log($location.host());    //127.0.0.1
+
+            console.log($location.url());     // /168?name=wally&age=17#8848
+        }])
+
+        /*
+        $location.absUrl()     绝对路径
+        $location.hash()       hash值
+        $location.search()     对象格式的查询字符串
+        $location.port()       端口号
+        $location.protocol()   协议
+        $location.host()       主机名
+        $location.path()       路径
+         */
+
+</script>
+</body>
+</html>

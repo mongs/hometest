@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+        <form class="form-inline text-center">
+            <button class="btn btn-primary btn-sm" ng-click="minus()" type="button" name="button">-</button>
+            <input type="text" ng-model="value">
+            <button class="btn btn-primary btn-sm" ng-click="plus()" type="button" name="button">+</button>
+        </form>
+
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            angular.module('app',[])
+                .controller('Controller',function($scope){
+                    $scope.value = 1;
+                    $scope.plus = function(){
+                        $scope.value++
+                    };
+                    $scope.minus = function(){
+                        if($scope.value===1){
+                            let result = confirm("您确定要删除此商品吗?");
+                            if(result){
+                                console.log("删除数据")
+                            }
+                            return;
+                        }
+                        $scope.value--
+                    };
+                    $scope.$watch('value',function(newValue,oldValue){
+                        //alert(!(newValue>=1))
+                        if(!(newValue>=1)){
+                            let result = confirm("您确定要删除此商品吗?");
+                            if(result){
+                                console.log("删除数据")
+
+                            }else{
+                                $scope.value = oldValue;
+                            }
+                        }
+                    })
+                })
+        </script>
+    </body>
+</html>

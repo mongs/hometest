@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body ng-app="app">
+
+        <div ng-controller="Controller">
+
+            <select ng-model="value" ng-change="sayName(value)">
+                <option value="0">{{teachers[0]}}</option>
+                <option value="1">{{teachers[1]}}</option>
+                <option value="2">{{teachers[2]}}</option>
+            </select>
+
+            <!-- <button ng-click="sayName(value)">按钮</button> -->
+        </div>
+
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            angular.module('app',[])
+                .controller('Controller',function ($scope) {
+                    $scope.teachers = ["张天","杨芳","柴冰倩"]
+                    $scope.sayName = function (index) {
+                        alert($scope.teachers[index]);
+                    }
+                })
+
+
+        </script>
+    </body>
+</html>

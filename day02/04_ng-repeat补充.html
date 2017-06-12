@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js"></script>
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+        <ul>
+            <li ng-repeat="item in arr track by $index">
+                {{item}}
+            </li>
+        </ul>
+
+        <script>
+        angular.module('app',[])
+            .controller('Controller',['$scope',function($scope){
+                $scope.arr = ["web","Java","嵌入式","web"];
+            }])
+            /*
+            ng-repeat
+                默认不允许  出现  重复数据
+                要想使用重复数据   track by $index
+
+
+             */
+        </script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body >
+
+        <div ng-app="app" >
+            <h1 ng-controller="Controller">
+                {{data}}，{{sex}},
+                <br>
+                获取对象数据的值: {{teachers.age}}
+                <br>
+                <button type="button" name="button" ng-click="show()">按钮</button>
+            </h1>
+            这里是娶不到的，不在controller管理范围内： {{data}}
+        </div>
+
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            //定义module
+            const app = angular.module('app',[]);
+            app.controller("Controller",function($scope){
+                //通过$scope暴露数据
+                $scope.data = "wally"    //其实就是后台model的数据
+                $scope.sex = "man";
+                $scope.teachers = {
+                    name: "wally",
+                    sex:"man",
+                    age:18
+                };
+                //通过$scope暴露行为
+                $scope.show = function(){
+                    alert($scope.sex);
+                }
+            })
+            /*
+            1. 定义
+            var app = angular.module("module的名字"，["依赖模块1"，"依赖模块2"，...])
+            注意：
+                即使你没有依赖任何模块，也必须将[]填上
+            使用: ng-app="module的名字"
+
+            2. 在模块下定义了一个    属于这个模块    的控制器
+                并且， 必须要  “注入”  $scope
+                然后在$scope上挂载数据, 其实就是后台model的数据
+
+                app.controller("Controller的名字",function($scope){
+                    $scope.data = "wally"    //其实就是后台model的数据
+                })
+
+                使用：
+                    ng-controller="Controller的名字"    //controller的名字
+                    然后在这个controller的管理范围内（作用域内）就可以通过表达式{{}}绑定后台的数据，显示到视图View层
+            3. $scope:
+                作用域， 就是当前控制器所在的上下文环境， 只有在当前控制器的管理范围内， 才能取到$scope上的数据跟行为
+             */
+        </script>
+    </body>
+</html>

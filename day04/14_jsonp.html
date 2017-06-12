@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="Ctrl">
+    <input type="text" ng-model="search" ng-keyup="getData(search)">
+    <button type="button" name="button" ng-click="getData(search)">请求数据</button>
+    <ul>
+        <li ng-repeat="item in data">
+            <h3>{{item}}</h3>
+        </li>
+    </ul>
+    <script>
+        angular.module('app',[])
+            .controller('Ctrl',['$scope','$http','$timeout',function($scope,$http,$timeout){
+                $scope.data = ''
+                $scope.getData = function(search){
+                    
+                    $timeout.cancel($scope.timer)
+                    $scope.timer = $timeout(function () {
+                        $http({
+                            method:'jsonp',
+                            url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+ search + '&cb=JSON_CALLBACK'
+                        })
+                        .success(function(data,status){
+                            $scope.data = data.s;
+                            console.info(data,status);
+                        })
+                        .error(function(err,status){
+                            console.warn(err,status);
+                        })
+                    }, 2000);
+                }
+            }])
+            //https://api.douban.com/v2/book/1220562?callback=fn
+            //https://api.douban.com/v2/book/1220562?callback=angular.callbacks._0
+            //https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=angular&cb=JSON_CALLBACK
+            //豆瓣的api  不支持 .
+            //
+            //$timeout.cancel(timer)     取消定时器的方法,timer 定时器的名字
+    </script>
+</body>
+</html>

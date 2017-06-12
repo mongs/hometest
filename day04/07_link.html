@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js"></script>
+    </head>
+    <body ng-app="app">
+
+        <div class="">
+            <sram title="思软科技" textcolor="#fff" bgcolor="#00f"></sram>
+        </div>
+
+
+
+        <script>
+            angular.module('app',[])
+                .directive('sram',function(){
+                    return {
+                        link: function(scope,elem,attr){
+                            //console.log(attr['textcolor']);
+                            elem.css({
+                                "color":attr['textcolor'],
+                                "backgroundColor":attr['bgcolor']
+                            }).html(attr['title'])
+                        }
+                    }
+                })
+                /*
+                    默认情况下: scope:false
+                        指令的数据与控制器中的数据是共享的
+
+                    scope:true     父子级关系   继承   但是指令也有一个单独的作用域scope
+
+                    scope:{}     互不影响, 完全独立的作用域scope
+                        @     单向文本绑定   可以从父级作用域继承
+                        =     双向绑定     注意属性中不需要加{{}}
+                        &     调用父级作用域的函数
+
+                    link:
+                        主要用来操作dom
+                        接收三个参数:
+                            一参: scope 指令被使用的作用域
+                            二参: elem  绑定指令的元素的包裹元素  jqlite 类似JQ的对象
+                            三参: attr  绑定指令的元素上的属性
+                        注: 很奇怪的是, 他会自动将属性命中的大写字母转换成小写
+                 */
+        </script>
+    </body>
+</html>

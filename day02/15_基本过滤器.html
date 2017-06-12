@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js"></script>
+	</head>
+	<body ng-app>
+		
+		<h4>货币过滤器：{{1453.25 | currency}}</h4>
+		
+		<h4>自定义货币符号：{{1453.25 | currency:'¥'}}</h4>
+		
+		<hr />
+		
+		<h4>number限制小数位数: {{1453.255545 | number:0}}</h4>
+		
+		<h4>number限制小数位数: {{1453.255545 | number:2}}</h4>
+		
+		<hr />
+		<!--小数点也算一位-->
+		<h4>limitTo限制位数: {{1453.255545 | limitTo:6}}</h4>
+		<!--负数表示,保留倒数几位-->
+		<h4>limitTo限制位数: {{1453.255545 | limitTo:-3}}</h4>
+		
+		<!--lowercase转小写-->
+		<h4>
+			{{"HelloWorld" | lowercase}}
+		</h4>
+		<!--uppercase转大写-->
+		<h4>
+			{{"HelloWorld" | uppercase}}
+		</h4>
+		
+	</body>
+</html>

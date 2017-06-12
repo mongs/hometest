@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <input id="num1" type="number" >
+        <input id="plus" type="button" value="+">
+        <input id="num2" type="number" >
+        <input id="result-btn" type="button" value="=">
+        <input id="result" type="text">
+
+        <script>
+            const num1 = $('num1'),
+                num2 = $('num2'),
+                plus = $('plus'),
+                result = $('result'),
+                resultBtn = $('result-btn');
+
+            resultBtn.onclick = function(){
+                let _val1 = num1.value - 0,
+                    _val2 = num2.value - 0,
+                    _val = _val1 + _val2;
+                result.value = _val;
+            }
+
+            function $(id){
+                return document.getElementById(id);
+            }
+            
+            //隐式类型转换 加、减不同    alert("3" - 2)
+        </script>
+    </body>
+</html>

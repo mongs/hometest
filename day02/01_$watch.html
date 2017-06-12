@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+        <button type="button" name="button" ng-click="plus()">加</button>
+        <h1>{{arr.age}}</h1>
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            angular.module('app',[])
+                .controller('Controller',['$scope',function($scope){
+                    $scope.arr = {
+                        name:"wally",
+                        age:18,
+                        sex:"man"
+                    }
+                    $scope.plus = function(){
+                        $scope.arr.age++
+                    };
+
+                    //要想对象里的每一项数据的变化都去触发脏检查,将第三个参数设为true
+                    $scope.$watch('arr',function (newVal,oldVal) {
+                        alert('msg');
+                    },true)
+                }])
+        </script>
+    </body>
+</html>

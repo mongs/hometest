@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>表达式的数据绑定</title>
+    </head>
+    <body ng-app>
+
+        <input type="text" ng-model="value">
+        表达式里的内容是直接从后台model拿到的数据:
+        <h1>
+            {{value}}
+        </h1>
+        <script src="js/angular.js" charset="utf-8"></script>
+    </body>
+</html>

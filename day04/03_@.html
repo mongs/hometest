@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body ng-app="app">
+
+        <div ng-controller="Ctrl" class="">
+            <input type="text" ng-model="ctrlColor">
+            <div sram my-color="{{ctrlColor}}"></div>
+        </div>
+        <script>
+            angular.module('app',[])
+                .directive('sram',function(){
+                    return {
+                        template:'<h1 style="color:{{attrColor}}">思软科技</h1><input type="text" ng-model="attrColor">',
+                        scope:{
+                            attrColor:'@myColor'
+                        }
+                    }
+                })
+                .controller('Ctrl',['$scope',function($scope){
+                    $scope.ctrlColor = "red"
+                }])
+                /*
+                    默认情况下: scope:false
+                        指令的数据与控制器中的数据是共享的
+
+                    scope:true     父子级关系   继承   但是指令也有一个单独的作用域scope
+
+                    scope:{}     互不影响, 完全独立的作用域scope
+                        @     单向文本绑定   可以从父级作用域继承
+
+                 */
+        </script>
+    </body>
+</html>

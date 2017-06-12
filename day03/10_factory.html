@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js"></script>
+    </head>
+    <body ng-app="app">
+
+        <h3 ng-controller="Ctrl1">{{name}}
+            <ul>
+                <li ng-repeat="data in datas">{{data}}</li>
+            </ul>
+        </h3>
+        <h3 ng-controller="Ctrl2">{{name}}
+            {{age}}
+        </h3>
+
+
+
+        <script>
+            //自定义服务,可以实现数据的共享
+            angular.module('app',[])
+                .factory('ServiceName',function(){
+                    return {
+                        "name":"wally",
+                        "age": 17,
+                        "sex": "boy"
+                    }
+                })
+                .service('MyService',function(){
+                    return ["张天","柴冰倩","丁涛"]
+                })
+
+                .service('YourService',function(){
+                    return "17"
+                })
+                //使用服务,就要将其注入到控制器中
+                .controller('Ctrl1',function($scope,ServiceName,MyService){
+                    $scope.name = ServiceName.name
+                    $scope.datas = MyService;
+                })
+                .controller('Ctrl2',function($scope,ServiceName,YourService){
+                    $scope.name = ServiceName.name
+                    $scope.age = YourService
+                })
+
+                //service 只能返回对象类型
+                //factory 不做限制
+        </script>
+    </body>
+</html>

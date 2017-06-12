@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js"></script>
+	</head>
+	<body ng-app="app" ng-controller="Controller">
+		
+		<select ng-model="text" ng-options="item for item in arr">
+			
+		</select>
+		
+		<script>
+			angular.module('app',[])
+				.controller('Controller',function($scope){
+					$scope.arr = ["chai","yang","zhang"]
+				})
+			/*
+			ng-options="item for item in items"
+			ng-model="val"
+			*/
+		</script>
+	</body>
+</html>

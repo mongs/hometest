@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/bootstrap.css" />
+		<script src="js/angular.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="js/bootstrap.js"></script>
+        <style>
+        .active{color:#f00}
+        </style>
+	</head>
+
+	<body ng-app="app" ng-controller="Controller">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+					<a class="navbar-brand" href="#">Brand</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<form class="navbar-form navbar-left">
+						<div class="form-group">
+							<input ng-model="search" type="text" class="form-control" placeholder="Search">
+						</div>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">登录</a>
+						</li>
+						<li>
+							<a href="#">注册</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<table class="table">
+			<thead>
+				<tr>
+                    <th ng-click="changeOrder('id')">
+                        产品编号 <span ng-class="{'glyphicon-chevron-down':!isDown,'glyphicon-chevron-up':isDown,'active':orderType === 'id'}" class="glyphicon "></span>
+                    </th>
+                    <th ng-click="changeOrder('name')">
+                        产品名称 <span ng-class="{'glyphicon-chevron-down':!isDown,'glyphicon-chevron-up':isDown,'active':orderType === 'name'}" class="glyphicon"></span>
+                    </th>
+                    <th ng-click="changeOrder('price')">
+                        产品价格 <span ng-class="{'glyphicon-chevron-down':!isDown,'glyphicon-chevron-up':isDown,'active':orderType === 'price'}" class="glyphicon glyphicon-chevron-up"></span>
+                    </th>
+                </tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in products | filter:{id:search} | orderBy:orderBtn + orderType">
+					<td>{{product.id}}</td>
+					<td>{{product.name}}</td>
+					<td>{{product.price}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<script>
+			const app = angular.module('app',[]);
+			app.controller('Controller',['$scope',function($scope){
+				$scope.products = [
+		            {
+		                id:1000,
+		                name: 'iPhone7',
+		                quantity: 3,    //数量
+		                price: 6480
+		            },{
+		                id:2000,
+		                name: 'iPhone7 Plus',
+		                quantity: 7,
+		                price: 7480
+		            },{
+		                id:3000,
+		                name: '小米 7',
+		                quantity: 30,
+		                price: 1480
+		            },{
+		                id:4000,
+		                name: '诺基亚1330',
+		                quantity: 130,
+		                price: 200
+		            }
+		        ];
+                $scope.orderBtn = ""         //正 or 倒序
+                $scope.orderType = "id"     //控制排序类型
+                $scope.isDown = true;       //控制箭头上下
+
+                $scope.changeOrder = function (type) {
+                    if($scope.orderBtn === "-"){
+                        $scope.orderBtn = "";
+                        $scope.isDown = true;
+                    }else{
+                        $scope.orderBtn = "-"
+                        $scope.isDown = false
+                    }
+                    $scope.orderType = type;
+                }
+			}]);
+		</script>
+	</body>
+</html>

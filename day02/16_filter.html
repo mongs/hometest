@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js"></script>
+	</head>
+	<body ng-app="app" ng-controller="Controller">
+		
+		<ul>
+			<!--<li ng-repeat="item in city | filter:'ou'">
+				<h3>{{item.name}}</h3>
+				<p>{{item.company}}</p>
+			</li>-->
+			
+			<!--指定过滤某个字段里的数据
+				只留下name中有ou的项,其余字段包含ou的项不包含其中
+			-->
+			<li ng-repeat="item in city | filter:{name:'ou'}">
+				<h3>{{item.name}}</h3>
+				<p>{{item.company}}</p>
+			</li>
+			
+			
+			
+			
+		</ul>
+		<!--
+        	
+        	filter:过滤字段
+        	包含过滤字段的内容留下,其余内容被过滤掉
+        -->
+		<script>
+			angular.module('app',[])
+				.controller('Controller',function($scope){
+					$scope.city = [
+						{id:123,name:"taiyuan",company:"思软ou"},
+						{id:124,name:"xinzhou",company:"土豆"},
+						{id:125,name:"houma",company:"山药蛋"},
+						{id:126,name:"yuci",company:"古城"}
+						
+					]
+				})
+		</script>
+	</body>
+</html>

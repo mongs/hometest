@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js"></script>
+    <style>
+        p{
+            margin-top: 2000px;
+        }
+    </style>
+</head>
+<body ng-app="app" ng-controller="Ctrl">
+
+    <button type="button" name="button" ng-click="goBottom()">按钮</button>
+    <p id="bottom">这里是底部的文字</p>
+<script>
+    angular.module('app',[])
+        .controller('Ctrl',['$scope','$anchorScroll','$location',function($scope,$anchorScroll,$location){
+
+            $scope.goBottom = function(){
+                $location.hash('bottom')
+                $anchorScroll() //不加这个, 如果hash已经存在,就不会跳转, 加上以后仍然可以跳转
+            }
+        }])
+</script>
+</body>
+</html>

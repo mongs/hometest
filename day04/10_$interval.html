@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="Ctrl">
+
+    {{date | date:'yyyy-MM-dd HH:mm:ss'}}
+
+<script>
+
+    angular.module('app',[])
+        .controller('Ctrl',['$scope','$interval',function($scope,$interval){
+            $scope.date = new Date();
+            $interval(function(){
+                $scope.date = new Date();
+                //console.log($scope.date)
+            },1000)
+        }])
+
+        /*
+        $apply 手动触发脏检查
+            $scope.$apply(function(){})     推荐用这个写法
+            $scope.$apply()
+        $interval,$timeout:
+            用法类似原生js的计时器,但是原生的计时器不能触发脏检查去更新view,
+            这俩个家伙是可以的,
+            用的时候记得注入
+
+         */
+</script>
+</body>
+</html>

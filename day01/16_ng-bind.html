@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body ng-app="app" ng-controller="Controller" ng-init="value='<mark>name</mark>'">
+
+        <h1 ng-bind="name"></h1>
+        <h1 ng-bind-html="value"></h1>
+
+        <!-- {{name}} -->
+
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script src="js/angular-sanitize.js" charset="utf-8"></script>
+        <script>
+            //location.href = "http://www.baidu.com"
+            //alert("")
+            angular.module('app',["ngSanitize"])
+                .controller('Controller',['$scope',function($scope){
+                    $scope.name = "wally"
+                }])
+            /*
+
+                ng-init:
+                    初始化数据的,一般不建议使用
+                    初始化数据最好用控制器初始
+                ng-bind     绑定数据, 但是一般不使用, 不如{{}}灵活
+                    默认不让加html标签,    出于安全考虑
+                    跨站攻击
+                ng-bind-html:
+                    //cdn.bootcss.com/angular.js/1.4.6/angular-sanitize.js
+                    1. 需要引入 angular-sanitize.js
+                    2. 在module的依赖模块中,注入ngSanitize
+                        angular.module('app',["ngSanitize"])
+                    3. ng-init="value='<mark>name</mark>'"
+                    4. ng-bind-html="value"
+             */
+        </script>
+    </body>
+</html>

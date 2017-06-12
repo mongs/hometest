@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body >
+
+        <div ng-app="app">
+            <div ng-controller="Controller">
+                {{data}}
+
+                <br>
+
+                {{name}}
+            </div>
+
+            {{name}}
+        </div>
+        {{name}}
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            angular.module('app',[])
+                .controller('Controller',["$scope","$rootScope",function($scope,$rootScope){
+                    $scope.data = "wally"
+                    $rootScope.name = "fengjun"
+                }])
+            /*
+
+            定义控制器的第一种写法:
+                app.controller("Controller",function($scope){})
+                这种写法如果对代码压缩混淆的话,$scope会被替换,倒置程序出错
+            定义控制器的第二种写法:
+                app.controller('Controller',["$scope","$rootScope",function(a,b){}])
+                第二个参数是个大数组:
+                    数组的最后一项是函数,函数的参数会依次与数组的参数对应
+                    比如这里的a -> $scope, b -> $rootScope
+
+            $rootScope:
+                全局作用域
+                在ng-app管理范围内,任何地方都可以使用
+
+
+             */
+        </script>
+    </body>
+</html>

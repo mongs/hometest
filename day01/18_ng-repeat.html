@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+        <ul>
+            <li ng-repeat="teacher in teachers">
+                {{teacher}}
+            </li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>产品编号</th>
+                    <th>产品名称</th>
+                    <th>产品数量</th>
+                    <th>单价</th>
+                    <th>总价</th>
+                    <th>删除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in items">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.number}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.number * item.price}}</td>
+                    <td><button ng-click="removeItem(item.id)" class="btn btn-danger btn-sm">删除</button></td>
+                </tr>
+                <!-- <td>{{getTotalPrice()}}</td> -->
+            </tbody>
+        </table>
+
+        <script src="js/angular.js" charset="utf-8"></script>
+        <script>
+            angular.module('app',[])
+                .controller('Controller',['$scope',function ($scope) {
+                    $scope.teachers = ["张天","丁涛","柴冰倩"]
+
+                    $scope.items = [
+                        {
+                            id:123,
+                            name:"诺基亚1332",
+                            price:"3200",
+                            number:120
+                        },{
+                            id:124,
+                            name:"诺基亚1220",
+                            price:"2400",
+                            number:290
+                        },{
+                            id:125,
+                            name:"诺基亚560",
+                            price:"6000",
+                            number:100
+                        }
+                    ];
+
+                    $scope.removeItem = function(id){
+                        angular.forEach($scope.items,function(item,key,array){
+                            if(item.id === id){
+                                console.log(item,key);
+                                $scope.items.splice(key,1)
+                            }
+                            //$scope.items = null;
+                        })
+                    };
+
+
+
+                }])
+                /*
+                    ng-repeat:
+                        遍历数组
+                        ng-repeat = "item in items"
+
+                        items 是后台的数据,如: ["张天","丁涛","柴冰倩"]
+                        item 就是遍历到的每一项
+                        {{item}}  就能拿到数组中的每个值
+
+
+                    angular.forEach("一参",callback)
+                        一参: 要遍历的数据
+                        二参: 回调函数
+                            □ function(item,index,array){}
+                                ○ item: 当前遍历到的那一项
+                                ○ index: 当前项的索引值
+                                ○ array: 就是遍历的数据
+
+
+                    //从数组中删除某条数据
+                    var arr = ["张天","丁涛","柴冰倩"]
+                    arr.splice(1,1)
+                    alert(arr)
+
+
+
+                    $scope.getTotalPrice = function(){
+                        //...
+                        return str;
+                    }
+                 */
+        </script>
+    </body>
+</html>

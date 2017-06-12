@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+</head>
+<body class="container" ng-app="app">
+
+<div class="btn-group">
+    <button ng-click="$location.path('/123')" class="btn btn-primary">裤子</button>
+    <button ng-click="$location.path('/124')" class="btn btn-primary">衣服</button>
+    <button ng-click="$location.path('/125')" class="btn btn-primary">背心</button>
+</div>
+<!-- 此处存放理由匹配的视图 -->
+<div ng-view></div>
+
+<script>
+    angular.module('app',['ngRoute'])
+        .run(function($rootScope,$location){
+            $rootScope.$location = $location;
+            //路由改变之前触发事件
+            $rootScope.$on('$routeChangeStart',function(event,current,previous){
+                console.log(event)  //事件
+                console.log(current) //当前路由
+                console.log(previous) //上一个路由
+            })
+            //路由改变成功触发事件
+            $rootScope.$on('$routeChangeSuccess',function(event,current,previous){
+                console.log(event)  //事件
+                console.log(current) //当前路由
+                console.log(previous) //上一个路由
+            })
+        })
+        .config(function($routeProvider){
+            $routeProvider
+                .when('/:id',{
+                    templateUrl:'src/index.html',
+                    controller:'IndexCtrl'
+                })
+                .otherwise({
+                    template:'<h1>404</h1>'
+                })
+        })
+        .controller('IndexCtrl',['$scope','$routeParams',function($scope,$routeParams){
+            console.log($routeParams.id)
+            $scope.name =  $routeParams.id
+         }])
+
+    /*
+    1. 引入外部文件
+    2. 添加依赖
+    3. 使用模块的config方法, 配置路由:
+        //127.0.0.1
+        angular.module('app',['ngRoute'])
+            .config(function($routeProvider){
+                $routeProvider
+                    .when('/',{        当127.0.0.1    走这儿
+
+                    })
+                    .when('/index',{   当127.0.0.1/index   走这个
+
+                    })
+                    .otherwise({       如果上面两种都不是,   走这儿
+                        redirectTo:'/'   重定向
+                    })
+            })
+    4. ng-view 接受路由给的视图
+     */
+</script>
+</body>
+</html>

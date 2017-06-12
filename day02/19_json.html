@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/angular.js"></script>
+	</head>
+	<body ng-app="app" ng-controller="Controller">
+		
+		<button ng-click="plus()">增加</button>
+		
+		<pre>{{city | json}}</pre>
+		
+		<!--
+        	
+        	json + pre
+        		格式化json格式,
+        		可以用来调试,  看到的就相当于是后台的数据
+        -->
+		<script>
+			angular.module('app',[])
+				.controller('Controller',function($scope){
+					$scope.city = [
+						{id:123,name:"taiyuan",company:"思软ou",num:127},
+						{id:124,name:"xinzhou",company:"土豆",num:17},
+						{id:125,name:"houma",company:"山药蛋",num:27},
+						{id:126,name:"yuci",company:"古城",num:177}
+						
+					];
+					$scope.plus = function(){
+						$scope.city[0].num++
+					}
+				})
+		</script>
+	</body>
+</html>

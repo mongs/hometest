@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="Ctrl">
+
+<script>
+    angular.module('app',[])
+        .controller('Ctrl',['$scope','$cacheFactory',function($scope,$cacheFactory){
+            let myCache = $cacheFactory('cacheName')
+
+            myCache.put("key","value");
+            myCache.put("name","wally");
+            myCache.put("age",17);
+
+
+            myCache.remove('name')
+
+            console.log(myCache.info())
+
+            myCache.removeAll()
+
+            console.log(myCache.info())
+
+            console.log(myCache.get('key'),myCache.get('name'),myCache.get('age'))
+
+        }])
+        /*
+            缓存服务$cacheFactory:
+                1. 要使用该服务必须首先注入
+                2. 起个名字 let myCache = $cacheFactory('cacheName')
+                3. 添加缓存:
+                    myCache.put(key,value)
+                4. 获取缓存的值:
+                    myCache.get(key)
+                5. 移除某项缓存:
+                    myCache.remove(key)
+                6. 查看缓存详情:
+                    myCache.info()
+                        id: 起的名字
+                        size: 有几条缓存
+                7. 清空缓存:
+                    myCache.removeAll()
+         */
+</script>
+
+</body>
+</html>

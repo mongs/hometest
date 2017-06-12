@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body ng-app="app" ng-controller="Ctrl" class="container">
+        <br>
+        <form name="myForm" class="form-horizontal">
+            <input class="form-control" type="text" name="user" required ng-model="user"
+            ng-minlength="3"
+            ng-maxlength="8"
+            ng-pattern="/^[a-zA-Z]+$/"
+            ng-keyup="showMsg(myForm.user.$error)">
+
+            <br>
+            <p class="bg-danger">
+                <span ng-repeat="message in messages | filter:type">
+                    {{message.msg}}
+                </span>
+            </p>
+
+            <input class="btn btn-primary" type="submit" value="提交">
+        </form>
+
+        <h1>$error: {{myForm.user.$error}}</h1>
+
+
+        <script>
+            angular.module('app',[])
+                .controller('Ctrl',function ($scope) {
+                    $scope.type = "required"
+                    $scope.messages = [
+                        {"name":"required","msg":"请输入用户名"},
+                        {"name":"minlength","msg":"最少输入3位数"},
+                        {"name":"maxlength","msg":"最多输入8位"},
+                        {"name":"pattern","msg":"请输入字母格式"},
+                        {"name":"success","msg":"验证成功"}
+                    ];
+                    $scope.showMsg = function (err) {
+                        console.log(err);
+                        for(var key in err){
+                            console.log(key);
+                            if(err[key]){    //说明key对应的哪一项验证不通过
+                                $scope.type = key
+                                return;
+                            }
+                        }
+                        //如果能走到这里说明是成功的
+                        $scope.type = "success"
+                    }
+                })
+        </script>
+
+        <!--
+            form的name.控件的name.$error
+            $error:      不满足验证的信息
+            $valid:      验证通过
+            $invalid     验证未通过
+            $dirty       是否被动过
+            $pristine    还没被动过
+
+        -->
+    </body>
+</html>

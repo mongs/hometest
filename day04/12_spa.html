@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+
+<section class="page1" data-hash="page1">
+    <button type="button" name="button">打开page2</button>
+</section>
+
+<section class="page2" style="display:none" data-hash="page2">
+    我是page2
+</section>
+
+<script>
+    const btn = document.querySelector('button')
+    const page2 = document.querySelector('.page2')
+    const page1 = document.querySelector('.page1')
+    btn.onclick = function(){
+        page1.style.display = "none"
+        page2.style.display = "block"
+        const hash = page2.dataset.hash;
+        //console.log(hash)
+        location.hash = hash
+    }
+
+    window.onhashchange = function(){
+        let hash = location.hash
+        if(hash === ""){     //page1
+            page2.style.display = "none"
+            page1.style.display = "block"
+        }else{
+            page1.style.display = "none"
+            page2.style.display = "block"
+        }
+
+    }
+</script>
+
+</body>
+</html>

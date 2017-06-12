@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <script src="js/angular.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+    </head>
+    <body ng-app="app" ng-controller="Ctrl">
+
+        <div class="container">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li ng-click="getPage(1)">
+                        <a href="#">1</a>
+                    </li>
+                    <li ng-click="getPage(2)">
+                        <a href="#">2</a>
+                    </li>
+                    <li ng-click="getPage(3)">
+                        <a href="#">3</a>
+                    </li>
+                    <li ng-click="getPage(4)">
+                        <a href="#">4</a>
+                    </li>
+                    <li ng-click="getPage(5)">
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <ul>
+                <li ng-repeat="data in datas">
+                    {{data.title}}
+                </li>
+            </ul>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <script>
+            angular.module('app', []).controller('Ctrl', function($scope, $http, HttpService) {
+                let url = "https://api.douban.com/v2/movie/in_theaters";
+                let startNum = 0,
+                    countNum = 3;
+                $scope.datas = ''
+                $scope.getPage = function(index) {
+                    $('.modal').modal('show')
+                    startNum = countNum * (index - 1);
+                    HttpService.jsonp(url, {
+                        start: startNum,
+                        count: countNum
+                    }, function(data) {
+                        $scope.datas = data.subjects;
+                        $scope.$apply() //触发脏检查
+                        $('.modal').modal('hide')
+                        console.log(data)
+                    })
+
+                }
+
+            }).service('HttpService', function($window, $document) {
+                this.jsonp = function(url, data, callback) {
+                    //url  baidu.com?start=1
+                    //data  {start:20,count:20}
+                    //function fn(res){console.log(res)}
+                    //baidu.com?start=20&count=20&callback=fn
+
+                    //检查url，如果有？就用&开始链接data，如果没有？ 就用?开始链接
+                    let queryString = url.includes('?')
+                        ? "&"
+                        : "?";
+
+                    for (let key in data) {
+                        queryString += key + "=" + data[key] + "&"
+                    }
+
+                    queryString += "callback=fn"
+                    //fn({数据...})  fn is not defined  就需要我们去补上fn函数
+                    //var fn = function(data){...}
+                    $window['fn'] = callback;
+
+                    let scriptElem = $document[0].createElement('script');
+                    scriptElem.src = url + queryString;
+                    $document[0].body.appendChild(scriptElem)
+
+                }
+            })
+        </script>
+
+    </body>
+</html>

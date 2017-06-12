@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js" charset="utf-8"></script>
+    <script src="js/angular-animate.js" charset="utf-8"></script>
+    <style media="screen">
+        div{
+            width: 200px;height: 200px;background: #f00;
+            transition: all 500ms ease-in;
+            transform-origin: left top;
+        }
+
+        div.ng-hide-remove{
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        div.ng-hide-remove-active{
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        div.ng-hide-add{
+            opacity: 1;
+            transform: scale(1);
+        }
+        div.ng-hide-add-active{
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+    </style>
+</head>
+<body ng-app="app">
+
+    <input type="checkbox" ng-model="flag">
+    <div ng-show="flag">
+        this is the box
+
+    </div>
+    <script>
+        angular.module('app',['ngAnimate'])
+        /*
+        ng-enter
+        ng-enter-active
+        ng-leave
+        ng-leave-active
+
+        支持的指令:
+            if,view, repeat, include, switch
+
+
+        ng-hide-remove
+        ng-hide-remove-active
+        ng-hide-add
+        ng-hide-add-active
+            支持的指令:
+                class, show, hide, model
+
+
+
+         */
+    </script>
+
+
+</body>
+</html>

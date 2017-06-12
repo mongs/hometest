@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>表达式</title>
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body>
+
+        <h1 ng-app>
+            双大括号 ==》 表达式
+            <p>
+                1.数学运算：
+                {{1+2}}
+            </p>
+            <p>
+                2.字符串拼接：{{"hello" + "world"}}
+            </p>
+            <p>
+                3.也可以放对象：
+                {{{"name":"wally","sex":"man"}.name}}
+            </p>
+            <p>
+                4. 放数组：
+                {{["wally","fengjun"][1]}}
+            </p>
+            <p>
+                5.“undefined”不会报错：
+                {{undefined}}
+            </p>
+            <p>
+                6.“null”不会报错：
+                {{null}}
+            </p>
+            <p>
+                7.不能直接写判断、循环，但是可以写三元（三目）运算
+                {{false ? "_是真的" : "_假的笑吧"}}
+                <br>
+
+            </p>
+        </h1>
+    </body>
+</html>

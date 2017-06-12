@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js"></script>
+        <style>
+            div{
+                width: 200px;height: 200px;
+            }
+            .red {
+                background: #f00;
+            }
+            .yellow{
+                background: #ff0;
+            }
+        </style>
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+        <input type="checkbox" ng-model="isYellow">红、黄
+        <div ng-class="{red:!isYellow,yellow:isYellow}"></div>
+
+        <hr>
+
+        <h1 ng-class="'red'"> hello world</h1>
+
+        <hr>
+
+        <select ng-model="color">
+            <option value="red">红色</option>
+            <option value="yellow">黄色</option>
+        </select>
+        <h1 ng-class="color">根据select的值，改变背景颜色</h1>
+
+
+        <script>
+        angular.module('app',[])
+            .controller('Controller',['$scope',function($scope){
+                $scope.isYellow = true;
+            }])
+            /*
+            ng-class:
+                {
+                    class名： 布尔值，        //如果布尔值是true，就添加这个class
+                    class名： 布尔值          //如果布尔值是false，就移除这个class
+                }
+
+                如果想直接添加class， 记得加‘’， 不加引号，程序认为他是个变量，如：ng-class="'red'"
+
+
+             */
+        </script>
+    </body>
+</html>

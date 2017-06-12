@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/angular.js" charset="utf-8"></script>
+</head>
+<body ng-app="app">
+    <div ng-controller="Ctrl">
+        {{count}}
+        <div ng-controller="Ctrl" ng-click="$emit('plus')">
+            {{count}}
+            <div ng-controller="Ctrl">
+                {{count}}
+            </div>
+        </div>
+
+    </div>
+
+<script>
+    angular.module('app',[])
+        .controller('Ctrl',function($scope){
+            $scope.count = 1;
+            $scope.$on('plus',function(event){
+                $scope.count ++;
+                console.log(event.name)
+                console.log(event.targetScope)
+                event.stopPropagation()     //阻止冒泡
+            })
+        })
+        /*
+        $emit('事件名')          向上传播事件
+        $broadcast('事件名')     向下传播事件
+         */
+</script>
+
+</body>
+</html>

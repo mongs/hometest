@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js" charset="utf-8"></script>
+    </head>
+    <body ng-app="app" ng-controller="Ctrl">
+
+        <ul>
+            <li ng-repeat="product in products | myFilter:7000">
+                {{product.price}}
+            </li>
+        </ul>
+
+        <script>
+            angular.module('app',[])
+                .filter('myFilter',function(){
+                    return function(input,range){
+                        //input   ->     products
+                        //range   ->     : 后边的过滤条件
+                        let arr = [];
+                        if(input){
+                            for(let i=0;i<input.length;i++){
+                                if(input[i].price > range){
+                                    arr.push(input[i])
+                                }
+                            }
+                            return arr;
+                        }
+                    }
+                })
+                .controller('Ctrl',function($scope){
+                    $scope.products = [
+    		            {
+    		                id:1000,
+    		                name: 'iPhone7',
+    		                quantity: 3,    //数量
+    		                price: 6480
+    		            },{
+    		                id:2000,
+    		                name: 'iPhone7 Plus',
+    		                quantity: 7,
+    		                price: 7480
+    		            },{
+    		                id:3000,
+    		                name: '小米 7',
+    		                quantity: 30,
+    		                price: 1480
+    		            },{
+    		                id:4000,
+    		                name: '诺基亚1330',
+    		                quantity: 130,
+    		                price: 200
+    		            }
+    		        ];
+                });
+
+            /*
+            假设模块名是app
+            自定义过滤:
+                app.filter('一参','二参')
+                    一参: 自定义的过滤器的名字
+                    二参: 闭包
+                        function(){
+                            return function(input){
+                                //input -> 要过滤的内容
+                            }
+                        }
+
+             */
+
+        </script>
+    </body>
+</html>

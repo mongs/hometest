@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <script src="js/angular.js"></script>
+        <style media="screen">
+            .red {
+                background: #f00;
+            }
+            .yellow{
+                background: #ff0;
+            }
+        </style>
+    </head>
+    <body ng-app="app" ng-controller="Controller">
+
+
+        <ul>
+            <li ng-repeat="item in arr" ng-class="{red:item.startsWith('w')}" ng-class-even="'yellow'" ng-class-odd="'red'">
+                {{item}}
+            </li>
+        </ul>
+
+
+
+
+        <script>
+        angular.module('app',[])
+            .controller('Controller',['$scope',function($scope){
+                $scope.arr = ["wab","JAVA","嵌入式","百度","信息安全"];
+            }])
+            /*
+            ng-class-odd:
+                奇数行添加class
+            ng-class-even:
+                偶数行添加even    
+             */
+        </script>
+    </body>
+</html>
