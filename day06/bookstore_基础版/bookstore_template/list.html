@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="col s12 m4 input-field">
+		<select class="browser-default" ng-model="orderby">
+			<option value="title" ng-selected="true">title</option>
+			<option value="author">author</option>
+			<option value="price">price</option>
+			<option value="update">update</option>
+		</select>
+	</div>
+	<div class="col s12 m4 offset-m4 input-field"> <input type="search" name="search" id="search" ng-model="search" /> <label for="search">请输入书名</label> </div>
+</div>
+<div class="card-panel row hoverable valign-wrapper status-bar" ng-repeat="book in booksData | orderBy:orderby | filter:search">
+	<!--green-text 正常出售    red-text 暂无库存-->
+	<h6 class="status green-text">正常出售</h6>
+	<div class="col s4">
+		<a href="#!/{{book.id}}">
+			<img class="responsive-img" src="img/letters/{{book.id}}.jpg" alt="{{book.id}}" />
+		</a>
+	</div>
+	<div class="col s8">
+		<a href="">
+			<h3 class="black-text book-title">
+				{{book.title}}
+	      	</h3>
+        </a>
+		<p class="grey-text">{{book.author}}</p>
+		<div class="right-align">
+			<a href="" class="waves-effect waves-teal btn blue darken-2"> <i class="mdi-action-shopping-cart"> </i>{{book.price | currency}}</a>
+		</div>
+	</div>
+</div>

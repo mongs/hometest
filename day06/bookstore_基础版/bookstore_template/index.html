@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN" ng-app="BookStoreApp">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>BookStore</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="bower_components/materialize/dist/css/materialize.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<script src="https://cdn.bootcss.com/angular.js/1.6.4/angular.min.js" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/angular.js/1.6.4/angular-route.min.js" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<h3>
+				BookStore
+				<small class="grey-text">web AngularJS</small>
+			</h3>
+			<div class="divider"></div>
+
+			<div ng-view>
+
+			</div>
+		</div>
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/materialize/bin/materialize.js"></script>
+		<script>
+			angular.module('BookStoreApp',['ngRoute'])
+				.config(function ($routeProvider) {
+					$routeProvider
+						.when('/',{
+							templateUrl:"./list.html",
+							controller:"BookListController"
+						})
+						.when('/:id',{
+							templateUrl:"./detail.html",
+							controller:"BookDetailController"
+						})
+						.otherwise({
+							redirectTo:'/'
+						})
+				})
+				.controller('BookListController',function($scope,$http) {
+					$http.get('./db/books.json').then(function (result) {
+						console.log(result);
+						$scope.booksData = result.data.datas;
+					})
+				})
+				.controller('BookDetailController',function($scope,$http,$routeParams) {
+					let bookId = $routeParams.id;
+					console.log(bookId);
+					$http.get('./db/' + bookId + '.json').then(function (result) {
+						console.log(result);
+						$scope.bookDetailData = result.data;
+					})
+				})
+		</script>
+	</body>
+</html>
